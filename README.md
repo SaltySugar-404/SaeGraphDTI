@@ -6,11 +6,11 @@ We propose a DTI prediction model based on sequence feature extraction and graph
 These results demonstrate the excellent capability of this model in predicting potential DTI, providing a valuable tool for drug development.
 
 ## Requirements
-numpy
-pandas
-torch >=2.1.2
-torch-geometric >=2.4.0
-selfies >= 2.1.1
+- numpy
+- pandas
+- torch >=2.1.2
+- torch-geometric >=2.4.0
+- selfies >= 2.1.1
 
 ## Datasets
 We provide four datasets in the `data` folder: E, GPCR, IC, and DAVIS. You can add new datasets by placing a `dataset.csv` under `data/new_dataset_id`.

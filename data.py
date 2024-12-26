@@ -130,5 +130,19 @@ class GraphData:  # node_0 -> node_1
         print('average degree of drug = {} , average degree of target = {}'.format(self.num_positive / self.num_drugs, self.num_positive / self.num_targets))
 
 
+def convert_to_bidirectional(raw_edge_indexes, insert_or_append='append'):  # node_1 <-> node_2
+    new_edge_indexes = [[], []]
+    if insert_or_append == 'insert':
+        for index in range(len(raw_edge_indexes[0])):
+            new_edge_indexes[0] += [raw_edge_indexes[0][index], raw_edge_indexes[1][index]]
+            new_edge_indexes[1] += [raw_edge_indexes[1][index], raw_edge_indexes[0][index]]
+    elif insert_or_append == 'append':
+        new_edge_indexes[0] = raw_edge_indexes[0] + raw_edge_indexes[1]
+        new_edge_indexes[1] = raw_edge_indexes[1] + raw_edge_indexes[0]
+    else:
+        print('Error')
+    return new_edge_indexes
+
+
 if __name__ == '__main__':
     GraphData().show_graph_data()

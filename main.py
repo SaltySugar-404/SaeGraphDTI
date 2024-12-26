@@ -18,19 +18,6 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # device = 'cpu'
 
-def convert_to_bidirectional(raw_edge_indexes, insert_or_append='append'):  # node_1 <-> node_2
-    new_edge_indexes = [[], []]
-    if insert_or_append == 'insert':
-        for index in range(len(raw_edge_indexes[0])):
-            new_edge_indexes[0] += [raw_edge_indexes[0][index], raw_edge_indexes[1][index]]
-            new_edge_indexes[1] += [raw_edge_indexes[1][index], raw_edge_indexes[0][index]]
-    elif insert_or_append == 'append':
-        new_edge_indexes[0] = raw_edge_indexes[0] + raw_edge_indexes[1]
-        new_edge_indexes[1] = raw_edge_indexes[1] + raw_edge_indexes[0]
-    else:
-        print('Error')
-    return new_edge_indexes
-
 
 def get_train_test_in_folds(all_positive_edges, all_negative_edges, num_folds, shuffle=True):
     all_edges_0 = all_positive_edges[0] + all_negative_edges[0]
@@ -142,9 +129,6 @@ if __name__ == '__main__':
         all_f1_score.append(f1_score)
         all_auc_score.append(auc_score)
         all_aupr_score.append(aupr_score)
-        # draw_confusion_matrix(labels=last_labels, predicts=np.round(last_predicts))
-        # draw_ROC(labels=last_labels, predicts=last_predicts)
-        # draw_PR(labels=last_labels, predicts=last_predicts)
 
     accuracy_mean, accuracy_std = get_mean_and_std(all_accuracy)
     precision_mean, precision_std = get_mean_and_std(all_precision)
